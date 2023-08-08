@@ -6,6 +6,12 @@ This program extracts frames of a video by OpenCV and then maps the frame's pixe
 
 The code is thoroughly commented, making it easy to understand and customize as needed.
 
+## Demo
+
+<p align="center">
+  <img src="./images/demo.gif">
+</p>
+
 ## How to run
 
 1. Build: `make`
