@@ -12,6 +12,9 @@ The code is thoroughly commented, making it easy to understand and customize as 
   <img src="./images/demo.gif">
 </p>
 
+
+You can also view a demonstration at this [link](https://youtu.be/0nrwCxFS9QY).
+
 ## How to run
 
 1. Build: `make`
