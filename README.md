@@ -18,4 +18,4 @@ The code is thoroughly commented, making it easy to understand and customize as 
 
 ## Final
 
-Each frame's duration is computed theoretically, yet there's a minor delay beyond the duration when actually rendering each frame. The accumulation of these delays can cause the playback to be slightly slower than the actual video, and this delay varies depending on the OS. Therefore, I've slightly reduced the value of `SEC_2_MSEC` in [Video2Ascii.hpp](https://github.com/Avafly/Video2Ascii/raw/main/include/Video2Ascii.hpp). You can adjust this value to compensate for the delay.
+Each frame's duration is computed theoretically, yet there's a minor delay beyond the duration when actually rendering each frame. The accumulation of these delays can cause the playback to be slightly slower than the actual video, and this delay varies depending on the OS. Therefore, I've slightly reduced the value of `SEC_2_MSEC` in [Video2Ascii.hpp](https://github.com/Avafly/Video2Ascii/blob/main/include/Video2Ascii.hpp). You can adjust this value to compensate for the delay.
