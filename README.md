@@ -20,7 +20,7 @@ The code is thoroughly commented, making it easy to understand and customize as 
 
    Ex) `./main 15 https://github.com/Avafly/ImageHostingService/raw/master/uPic/badapple.mp4`
 
-*This program needs the OpenCV environment. You can verify if OpenCV is installed by `pkg-config --version opencv`.
+*This program needs the OpenCV environment. You can verify if OpenCV is installed by `pkg-config --version opencv`.*
 
 ## Final
 
