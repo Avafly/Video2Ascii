@@ -5,6 +5,15 @@
 #include <thread>
 #include <chrono>
 
+void Video2Ascii::clear_console() {
+    // clear console
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
 int Video2Ascii::nearest_divisor(int N, int input) {
     if (input <= 0) { return -1; }
     int lower = input, upper = input;
@@ -25,7 +34,7 @@ void Video2Ascii::set_width_and_height(const cv::VideoCapture &video) {
     int tmnl_height = ws.ws_row;
 
     // compute playback height and width
-    double aspect_ratio = static_cast<double>(video_width) / static_cast<double>(video_height) / 0.55;
+    double aspect_ratio = static_cast<double>(video_width) / static_cast<double>(video_height) / 0.5;
     this->width = std::min(video_width, tmnl_width);
     this->height = static_cast<int>(this->width / aspect_ratio);
     if(this->height > tmnl_height) {
@@ -71,6 +80,7 @@ void Video2Ascii::video_to_ascii(const std::string &video_path, int desired_fps)
     desired_fps = nearest_divisor(original_fps, desired_fps);
     int frame_skip = std::max(1, original_fps / desired_fps);
     double frame_duration = 1.0 / desired_fps;
+    auto frame_duration_msec = std::chrono::microseconds(static_cast<int>(frame_duration * this->SEC_2_MSEC));
     // show frame info
     std::cout << "original fps: " << original_fps
               << ", desired fps: " << desired_fps
@@ -99,26 +109,22 @@ void Video2Ascii::video_to_ascii(const std::string &video_path, int desired_fps)
         ascii_frames.push_back(this->frame_to_ascii(frame));
     }
 
-    // clear console
-    #ifdef _WIN32
-        system("cls");
-    #else
-        system("clear");
-    #endif
+    clear_console();
 
     // print frames
-    for(auto ascii_frame : ascii_frames) {
+    std::ios::sync_with_stdio(false);
+    for(const auto &ascii_frame : ascii_frames) {
         // move cursor to the top-left corner
         std::cout << "\033[H";
 
         // print ascii frame to console
-        std::cout << ascii_frame << std::endl;
+        std::cout << ascii_frame << std::flush;
 
         // wait for the duration of the frame
-        std::this_thread::sleep_for(
-            std::chrono::microseconds(static_cast<int>(frame_duration * this->SEC_2_MSEC))
-        );
+        std::this_thread::sleep_for(frame_duration_msec);
     }
+
+    clear_console();
 
     video.release();
 }

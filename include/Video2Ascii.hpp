@@ -5,6 +5,8 @@
 
 class Video2Ascii {
 public:
+    void clear_console();
+
     /**
      * Description:
      * nearest_divisor() finds the nearest divisor of N to a given input value.
@@ -52,7 +54,7 @@ public:
 
 private:
     // slightly reduce the value of SEC_2_MSEC to compensate for the print latency effect
-    static constexpr int SEC_2_MSEC = 990000;
+    static constexpr int SEC_2_MSEC = 996000;
     // playback  width and height
     int width;
     int height;

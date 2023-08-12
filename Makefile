@@ -8,7 +8,7 @@ TARGET=main
 all: $(TARGET)
 
 $(TARGET): $(SRCS)
-	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS) -O2
 
 clean:
 	rm -f $(TARGET)
