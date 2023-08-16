@@ -27,4 +27,8 @@ You can also view a demonstration at this [link](https://youtu.be/0nrwCxFS9QY).
 
 ## Final
 
-Each frame's duration is computed theoretically, yet there's a minor delay beyond the duration when actually rendering each frame. The accumulation of these delays can cause the playback to be slightly slower than the actual video, and this delay varies depending on the OS. Therefore, I've slightly reduced the value of `SEC_2_MSEC` in [Video2Ascii.hpp](https://github.com/Avafly/Video2Ascii/blob/main/include/Video2Ascii.hpp). You can adjust this value to compensate for the delay.
+While each frame duration is theoretically computed, rendering introduces minor latency, potentially slowing playback. This latency varies across devices.
+
+Therefore, I updated the latency compensation code. The principle behind it is to play 3s of blank frames and compute the latency for each frame to make compensations. It effectively eliminated the latency on a Debian, but somehow, there's still a slight delay when running on my M1 Mac.
+
+~~Therefore, I've slightly reduced the value of `SEC_2_MSEC` in [Video2Ascii.hpp](https://github.com/Avafly/Video2Ascii/blob/main/include/Video2Ascii.hpp). You can adjust this value to compensate for the delay.~~

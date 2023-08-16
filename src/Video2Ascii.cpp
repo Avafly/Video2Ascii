@@ -14,6 +14,33 @@ void Video2Ascii::clear_console() {
     #endif
 }
 
+int Video2Ascii::measure_latency(int desired_fps) {
+    int test_sec = 3;
+    int frame_size = test_sec * desired_fps;
+    std::string test_frame;
+    for(int i = 0; i < this->height; ++i) {
+        test_frame += std::string(this->width, ' ');
+        test_frame += '\n';
+    }
+    std::vector<std::string> test_frames(frame_size, test_frame);
+
+    // start time
+    auto start = std::chrono::high_resolution_clock::now();
+
+    auto frame_duration_msec = std::chrono::microseconds(static_cast<int>((1.0 / desired_fps) * this->SEC_2_MSEC));
+    for(const auto &frame : test_frames) {
+        std::cout << "\033[H";
+        // std::cout << "\033[2J\033[H";
+        std::cout << frame << std::flush;
+        std::this_thread::sleep_for(frame_duration_msec);
+    }
+
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
+    return static_cast<int>((duration.count() - test_sec * 1000000) / static_cast<double>(frame_size));
+}
+
 int Video2Ascii::nearest_divisor(int N, int input) {
     if (input <= 0) { return -1; }
     int lower = input, upper = input;
@@ -79,8 +106,6 @@ void Video2Ascii::video_to_ascii(const std::string &video_path, int desired_fps)
     desired_fps = std::min(desired_fps, original_fps);
     desired_fps = nearest_divisor(original_fps, desired_fps);
     int frame_skip = std::max(1, original_fps / desired_fps);
-    double frame_duration = 1.0 / desired_fps;
-    auto frame_duration_msec = std::chrono::microseconds(static_cast<int>(frame_duration * this->SEC_2_MSEC));
     // show frame info
     std::cout << "original fps: " << original_fps
               << ", desired fps: " << desired_fps
@@ -111,8 +136,13 @@ void Video2Ascii::video_to_ascii(const std::string &video_path, int desired_fps)
 
     clear_console();
 
-    // print frames
+    // compensate for latency
     std::ios::sync_with_stdio(false);
+    int latency = measure_latency(desired_fps);
+    double frame_duration = 1.0 / desired_fps;
+    auto frame_duration_msec = std::chrono::microseconds(static_cast<int>(frame_duration * this->SEC_2_MSEC) - latency);
+
+    // print frames
     for(const auto &ascii_frame : ascii_frames) {
         // move cursor to the top-left corner
         std::cout << "\033[H";

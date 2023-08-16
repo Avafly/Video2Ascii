@@ -9,6 +9,18 @@ public:
 
     /**
      * Description:
+     * latency_calibration() returns the latency of printing a frame.
+     *
+     * Arguments:
+     * @param desired_fps: Desired FPS
+     *
+     * Returns:
+     * An integer representing the latency of printing a frame.
+     */
+    int measure_latency(int desired_fps);
+
+    /**
+     * Description:
      * nearest_divisor() finds the nearest divisor of N to a given input value.
      *
      * Arguments:
@@ -54,7 +66,7 @@ public:
 
 private:
     // slightly reduce the value of SEC_2_MSEC to compensate for the print latency effect
-    static constexpr int SEC_2_MSEC = 996000;
+    static constexpr int SEC_2_MSEC = 1000000;
     // playback  width and height
     int width;
     int height;
