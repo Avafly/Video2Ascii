@@ -38,7 +38,7 @@ int Video2Ascii::measure_latency(int desired_fps) {
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
 
-    return static_cast<int>((duration.count() - test_sec * 1000000) / static_cast<double>(frame_size));
+    return static_cast<int>((duration.count() - test_sec * this->SEC_2_MSEC) / static_cast<double>(frame_size));
 }
 
 int Video2Ascii::nearest_divisor(int N, int input) {
@@ -72,7 +72,6 @@ void Video2Ascii::set_width_and_height(const cv::VideoCapture &video) {
 
 
 std::string Video2Ascii::frame_to_ascii(cv::Mat frame) {
-    std::string ascii_chars = "@%#*+=-:. ";
     std::string ascii_frame;
 
     // resize frame
@@ -81,7 +80,7 @@ std::string Video2Ascii::frame_to_ascii(cv::Mat frame) {
     for(int y = 0; y < this->height; ++y) {
         for(int x = 0; x < this->width; ++x) {
             // map pixel values to ascii chars
-            ascii_frame += ascii_chars[frame.at<uchar>(y, x) / 32];
+            ascii_frame += this->ascii_chars[frame.at<uchar>(y, x) / 32];
         }
         ascii_frame += "\n";
     }
@@ -137,7 +136,6 @@ void Video2Ascii::video_to_ascii(const std::string &video_path, int desired_fps)
     clear_console();
 
     // compensate for latency
-    std::ios::sync_with_stdio(false);
     int latency = measure_latency(desired_fps);
     double frame_duration = 1.0 / desired_fps;
     auto frame_duration_msec = std::chrono::microseconds(static_cast<int>(frame_duration * this->SEC_2_MSEC) - latency);

@@ -2,6 +2,7 @@
 #define Video2Ascii_hpp
 
 #include <opencv2/opencv.hpp>
+#include <string>
 
 class Video2Ascii {
 public:
@@ -65,6 +66,7 @@ public:
     void video_to_ascii(const std::string &video_path, int desired_fps=12);
 
 private:
+    std::string ascii_chars = " .:!+*e@";
     // slightly reduce the value of SEC_2_MSEC to compensate for the print latency effect
     static constexpr int SEC_2_MSEC = 1000000;
     // playback  width and height

@@ -13,6 +13,10 @@ int main(int argc, char *argv[]) {
     }
 
     Video2Ascii v2a;
+
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+
     v2a.video_to_ascii(argv[2], desired_fps);
 
     return 0;
