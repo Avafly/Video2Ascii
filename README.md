@@ -9,11 +9,8 @@ The code is thoroughly commented, making it easy to understand and customize as 
 ## Demo
 
 <p align="center">
-  <img src="./images/demo.gif">
+  <img src="https://github.com/Avafly/ImageHostingService/raw/master/uPic/rot_donutt.gif">
 </p>
-
-
-You can also view a demonstration at this [link](https://youtu.be/0nrwCxFS9QY).
 
 ## How to run
 
