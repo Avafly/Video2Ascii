@@ -30,7 +30,6 @@ int Video2Ascii::measure_latency(int desired_fps) {
     auto frame_duration_msec = std::chrono::microseconds(static_cast<int>((1.0 / desired_fps) * this->SEC_2_MSEC));
     for(const auto &frame : test_frames) {
         std::cout << "\033[H";
-        // std::cout << "\033[2J\033[H";
         std::cout << frame << std::flush;
         std::this_thread::sleep_for(frame_duration_msec);
     }
@@ -72,17 +71,17 @@ void Video2Ascii::set_width_and_height(const cv::VideoCapture &video) {
 
 
 std::string Video2Ascii::frame_to_ascii(cv::Mat frame) {
-    std::string ascii_frame;
+    std::string ascii_frame(this->height * (this->width + 1), ' ');
 
     // resize frame
     cv::resize(frame, frame, cv::Size(this->width, this->height));
 
-    for(int y = 0; y < this->height; ++y) {
-        for(int x = 0; x < this->width; ++x) {
+    for(int h = 0; h < this->height; ++h) {
+        for(int w = 0; w < this->width; ++w) {
             // map pixel values to ascii chars
-            ascii_frame += this->ascii_chars[frame.at<uchar>(y, x) / 32];
+            ascii_frame[h * (this->width + 1) + w] = this->ascii_chars[frame.at<uchar>(h, w) / 32];
         }
-        ascii_frame += "\n";
+        ascii_frame[h * (this->width + 1) + this->width] = '\n';
     }
 
     return ascii_frame;
