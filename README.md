@@ -6,21 +6,32 @@ This program extracts frames of a video by OpenCV and then maps the frame's pixe
 
 The code is thoroughly commented, making it easy to understand and customize as needed.
 
-## Demo
-
-<p align="center">
-  <img src="https://github.com/Avafly/ImageHostingService/raw/master/uPic/rot_donutt.gif">
-</p>
-
 ## How to run
 
 1. Build: `make`
 
 2. Run: `./main <fps> <video address>`
 
-   Ex) `./main 15 https://github.com/Avafly/ImageHostingService/raw/master/uPic/badapple.mp4`
+   Ex) `./main 30 https://github.com/Avafly/ImageHostingService/raw/master/uPic/badapple.mp4`
 
 *This program needs the OpenCV environment. You can verify if OpenCV is installed by `pkg-config --version opencv`.*
+
+## Demo
+
+Play spinning donut in Terminal
+
+<p align="center">
+  <img src="https://github.com/Avafly/ImageHostingService/raw/master/uPic/rot_donutt.gif" width="450">
+</p>
+
+
+
+Play Bad Apple in Terminus on iPadOS
+
+<p align="center">
+  <img src="https://github.com/Avafly/ImageHostingService/raw/master/uPic/bad_apple.gif" width="450">
+</p>
+
 
 ## Final
 
