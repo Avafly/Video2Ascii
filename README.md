@@ -24,20 +24,24 @@ Play spinning donut in Terminal
   <img src="https://github.com/Avafly/ImageHostingService/raw/master/uPic/rot_donutt.gif" width="450">
 </p>
 
-
-
 Play Bad Apple in Terminus on iPadOS
 
-<p align="center">
-  <img src="https://github.com/Avafly/ImageHostingService/raw/master/uPic/bad_apple.gif" width="450">
-</p>
-
+<details>
+  <summary>Click</summary>
+    <p align="center">
+      <img src="https://github.com/Avafly/ImageHostingService/raw/master/uPic/bad_apple.gif" width="450">
+    </p>
+</details>
 
 Play rotating earth in Visual Studio Console on Windows 10
 
-<p align="center">
-  <img src="https://github.com/Avafly/ImageHostingService/raw/master/uPic/earth_vstudio_win10.gif" width="450">
-</p>
+<details>
+  <summary>Click</summary>
+    <p align="center">
+      <img src="https://github.com/Avafly/ImageHostingService/raw/master/uPic/earth_vstudio_win10.gif" width="450">
+    </p>
+</details>
+
 
 ## Final
 
