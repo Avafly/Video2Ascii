@@ -12,7 +12,7 @@ The code is thoroughly commented, making it easy to understand and customize as 
 
 2. Run: `./main <fps> <video address>`
 
-   Ex) `./main 30 https://github.com/Avafly/ImageHostingService/raw/master/uPic/badapple.mp4`
+   Ex) `./main 15 https://github.com/Avafly/ImageHostingService/raw/master/uPic/badapple.mp4`
 
 *This program needs the OpenCV environment. You can verify if OpenCV is installed by `pkg-config --version opencv`.*
 
@@ -32,6 +32,12 @@ Play Bad Apple in Terminus on iPadOS
   <img src="https://github.com/Avafly/ImageHostingService/raw/master/uPic/bad_apple.gif" width="450">
 </p>
 
+
+Play rotating earth in Visual Studio Console on Windows 10
+
+<p align="center">
+  <img src="https://github.com/Avafly/ImageHostingService/raw/master/uPic/earth_vstudio_win10.gif" width="450">
+</p>
 
 ## Final
 

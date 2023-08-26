@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "Video2Ascii.hpp"
 
 int main(int argc, char *argv[]) {

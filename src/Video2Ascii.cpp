@@ -1,9 +1,15 @@
 #include "Video2Ascii.hpp"
-#include <sys/ioctl.h>
 #include <iostream>
-#include <unistd.h>
 #include <thread>
 #include <chrono>
+
+#ifdef _WIN32
+    #define NOMINMAX
+    #include <windows.h>
+#else
+    #include <sys/ioctl.h>
+    #include <unistd.h>
+#endif
 
 void Video2Ascii::clear_console() {
     // clear console
@@ -54,10 +60,17 @@ void Video2Ascii::set_width_and_height(const cv::VideoCapture &video) {
     int video_height = video.get(cv::CAP_PROP_FRAME_HEIGHT);
 
     // get terminal size
-    struct winsize ws;
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws);
-    int tmnl_width = ws.ws_col;
-    int tmnl_height = ws.ws_row;
+    #ifdef _WIN32
+        CONSOLE_SCREEN_BUFFER_INFO csbi;
+        GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+        int tmnl_width = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+        int tmnl_height = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+    #else
+        struct winsize ws;
+        ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws);
+        int tmnl_width = ws.ws_col;
+        int tmnl_height = ws.ws_row;
+    #endif
 
     // compute playback height and width
     double aspect_ratio = static_cast<double>(video_width) / static_cast<double>(video_height) / 0.5;
